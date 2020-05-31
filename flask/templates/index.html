@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- https://getbootstrap.com/docs/4.4/components/alerts/ -->
+
+<html>
+  <head>
+    <title>Website On Demand</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:site_name" content="Website On Demand" />
+    <meta property="og:title" content="Make a Personal Website in 1 Minute" />
+    <meta property="og:description" content="The easiest way to make a single page HTML website for yourself" />
+    <!-- <meta property="og:image" content="me.png" /> -->
+    <meta property="og:type" content="website" />
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Website On Demand</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/jere-mie/website-creator">Github</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="https://devpost.com/software/website-on-demand">DevPost</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="https://discord.gg/sFpXdgB">Discord Server</a>
+              </li>
+        </ul>
+      </div>
+    </nav>
+    <br><br><br><br>
+    {% if websiteMade %}
+    <div class="container">
+            <h1 class="center">Download and Preview Your Website</h1>
+            <br>
+            <p class="center">
+                <a href="{{ url_for('static', filename='out.zip') }}" class="btn btn-outline-primary" download>Download your website here!</a>
+            </p>
+            <br><br>
+            <div class="flex-container">
+                <iframe src="{{ url_for('static', filename='index.html') }}" height="500" width="700"></iframe>
+            </div>
+            <br><br><br><br>
+            <p class="center">
+                <a href="{{ url_for('home') }}" class="btn btn-outline-primary">Create a New Website</a>
+            </p>
+        </div>
+    {% else %}
+    <div class="container"><div class="row">
+        <div class="col-md-8">
+            <h1 class="thin center">Create Your Website Now!</h1>
+            <br>
+            <h4 class="thin">Simply fill in the following fields and you'll have a perfect website you can host on GitHub</h4>
+            <h4 class="thin">Did you know this website builder can also be run by our custom Discord bot? Join our server to test it out.</h4>
+            <br>
+            <a href="https://discord.gg/sFpXdgB" class="btn btn-outline-primary">Join our Discord to Test the Website Bot</a>
+            <br><br>
+            <form method='POST' action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 thin"></legend>
+                    <div class="form-group">
+                        {{ form.name.label(class="form-control-label") }}
+                        {{ form.name(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.img.label(class="form-control-label") }}
+                        {{ form.img(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.desc.label(class="form-control-label") }}
+                        {{ form.desc(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.school.label(class="form-control-label") }}
+                        {{ form.school(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.year.label(class="form-control-label") }}
+                        {{ form.year(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.github.label(class="form-control-label") }}
+                        {{ form.github(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.linkedin.label(class="form-control-label") }}
+                        {{ form.linkedin(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.resume.label(class="form-control-label") }}
+                        {{ form.resume(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                    {{ form.submit(class='btn btn-outline-primary') }}
+                    </div>
+                </fieldset>
+            </form>    
+        </div>
+    </div></div>
+    {% endif %}
+    <br><br><br><br>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  </body>
+</html>
